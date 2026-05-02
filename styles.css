@@ -36,6 +36,39 @@ select {
   font: inherit;
 }
 
+.linkedin-float {
+  position: fixed !important;
+  top: max(18px, env(safe-area-inset-top)) !important;
+  right: max(18px, env(safe-area-inset-right)) !important;
+  z-index: 2147483647;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border: 1px solid rgba(255, 253, 250, 0.38);
+  border-radius: 50%;
+  background: #0a66c2;
+  color: #fffdfa;
+  box-shadow: 0 18px 40px rgba(10, 102, 194, 0.34);
+  isolation: isolate;
+  pointer-events: auto;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.linkedin-float svg {
+  display: block;
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.linkedin-float:hover {
+  transform: translateY(-2px);
+  background: #084f96;
+  box-shadow: 0 22px 48px rgba(10, 102, 194, 0.42);
+}
+
 .sheet-stage {
   position: relative;
   min-height: 100vh;
