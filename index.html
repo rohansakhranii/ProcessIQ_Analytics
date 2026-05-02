@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DataConvert Analytics Studio</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main>
+      <section class="sheet-stage" aria-label="Spreadsheet conversion experience">
+        <div class="topbar" aria-label="Company mark">
+          <div class="brand-mark">DC</div>
+          <div>
+            <p class="brand-name">DataConvert Analytics</p>
+            <p class="brand-line">Business intelligence from messy sheets</p>
+          </div>
+        </div>
+
+        <div class="sheet-wrap" id="sheetWrap">
+          <div class="sheet-window" aria-label="Mock sales spreadsheet">
+            <div class="sheet-toolbar">
+              <div class="window-dot coral"></div>
+              <div class="window-dot amber"></div>
+              <div class="window-dot green"></div>
+              <span class="file-chip">Q4_Revenue_Raw_Data.xlsx</span>
+              <span class="sync-chip">Live sheet</span>
+            </div>
+            <div class="formula-bar">
+              <span>fx</span>
+              <strong>=SUMIFS(Revenue, Product, selected_product)</strong>
+            </div>
+            <div class="sheet-grid" role="table" aria-label="Business data table">
+              <div class="cell head corner"></div>
+              <div class="cell head">A</div>
+              <div class="cell head">B</div>
+              <div class="cell head">C</div>
+              <div class="cell head">D</div>
+              <div class="cell head">E</div>
+              <div class="cell row-head">1</div>
+              <div class="cell title">Month</div>
+              <div class="cell title">Product</div>
+              <div class="cell title">Sales</div>
+              <div class="cell title">Revenue</div>
+              <div class="cell title">Growth</div>
+              <div class="cell row-head">2</div>
+              <div class="cell">Jan</div>
+              <div class="cell">Insight Hub</div>
+              <div class="cell">118</div>
+              <div class="cell">$64,800</div>
+              <div class="cell pos">+12%</div>
+              <div class="cell row-head">3</div>
+              <div class="cell">Feb</div>
+              <div class="cell">Revenue Lens</div>
+              <div class="cell">132</div>
+              <div class="cell">$72,100</div>
+              <div class="cell pos">+16%</div>
+              <div class="cell row-head">4</div>
+              <div class="cell">Mar</div>
+              <div class="cell">Ops Pulse</div>
+              <div class="cell">126</div>
+              <div class="cell">$69,400</div>
+              <div class="cell pos">+9%</div>
+              <div class="cell row-head">5</div>
+              <div class="cell">Apr</div>
+              <div class="cell">Insight Hub</div>
+              <div class="cell">151</div>
+              <div class="cell active">$85,900</div>
+              <div class="cell pos">+21%</div>
+              <div class="cell row-head">6</div>
+              <div class="cell">May</div>
+              <div class="cell">Revenue Lens</div>
+              <div class="cell">148</div>
+              <div class="cell">$83,200</div>
+              <div class="cell pos">+18%</div>
+              <div class="cell row-head">7</div>
+              <div class="cell">Jun</div>
+              <div class="cell">Ops Pulse</div>
+              <div class="cell">166</div>
+              <div class="cell">$96,500</div>
+              <div class="cell pos">+24%</div>
+            </div>
+          </div>
+
+          <button class="convert-btn" id="convertBtn" type="button">
+            <span class="spark" aria-hidden="true"></span>
+            Convert sheet to dashboard
+          </button>
+        </div>
+
+        <div class="dashboard-shell" id="dashboard" aria-label="Interactive reporting dashboard">
+          <div class="dashboard-head">
+            <div>
+              <p class="section-kicker" id="dashboardKicker">Sales dashboard selected</p>
+              <h1 id="dashboardTitle">Sales, revenue, and product growth in one reporting view</h1>
+            </div>
+            <label class="filter-control">
+              <span id="filterLabel">Product</span>
+              <select id="productFilter" aria-label="Dashboard filter">
+                <option value="all">All products</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="dashboard-tabs" id="dashboardTabs" aria-label="Dashboard expertise selector">
+            <button class="dashboard-tab is-active" type="button" data-dashboard="sales">Sales dashboard</button>
+            <button class="dashboard-tab" type="button" data-dashboard="consumption">Consumption dashboard</button>
+            <button class="dashboard-tab" type="button" data-dashboard="social">Instagram & WhatsApp analysis</button>
+            <button class="dashboard-tab" type="button" data-dashboard="leads">Leads analysis dashboard</button>
+          </div>
+
+          <div class="metric-row" aria-label="Dashboard KPIs">
+            <article class="metric">
+              <span id="metricOneLabel">Total revenue</span>
+              <strong id="revenueKpi">$0</strong>
+              <small id="revenueDelta">+0% YoY</small>
+            </article>
+            <article class="metric">
+              <span id="metricTwoLabel">Total sales</span>
+              <strong id="salesKpi">0</strong>
+              <small id="metricTwoNote">units sold</small>
+            </article>
+            <article class="metric">
+              <span id="metricThreeLabel">Best month</span>
+              <strong id="bestMonth">-</strong>
+              <small id="bestMonthValue">$0 revenue</small>
+            </article>
+          </div>
+
+          <div class="report-grid">
+            <article class="panel chart-panel">
+              <div class="panel-title">
+                <h2 id="chartTitle">Sales and revenue trend</h2>
+                <span id="chartLabel">All products</span>
+              </div>
+              <canvas id="trendChart" width="880" height="420" aria-label="Trend chart"></canvas>
+            </article>
+
+            <article class="panel">
+              <div class="panel-title">
+                <h2 id="tableTitle">Year on year growth</h2>
+                <span id="tableSubtitle">By reporting year</span>
+              </div>
+              <div class="growth-table" role="table" aria-label="Year on year growth table">
+                <div class="table-row table-head" role="row">
+                  <span id="tableHeadOne">Year</span>
+                  <span id="tableHeadTwo">Revenue</span>
+                  <span id="tableHeadThree">YoY</span>
+                </div>
+                <div id="growthRows"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sop-section" aria-label="Standard operating procedures">
+        <div class="sop-intro">
+          <p class="section-kicker">Our analytics SOPs</p>
+          <h2>From the first business question to final project closure, every analytics build follows a clear operating rhythm.</h2>
+        </div>
+        <div class="sop-explorer">
+          <div class="sop-map" id="sopMap" aria-label="Interactive SOP flow">
+            <button class="sop-node is-active" type="button" data-step="0">
+              <span>01</span>
+              <strong>Requirement Gathering</strong>
+            </button>
+            <button class="sop-node" type="button" data-step="1">
+              <span>02</span>
+              <strong>Stakeholder Sign-off</strong>
+            </button>
+            <button class="sop-node" type="button" data-step="2">
+              <span>03</span>
+              <strong>Resource Finalization</strong>
+            </button>
+            <button class="sop-node" type="button" data-step="3">
+              <span>04</span>
+              <strong>Commercial Finalization</strong>
+            </button>
+            <button class="sop-node" type="button" data-step="4">
+              <span>05</span>
+              <strong>Prototype Generation</strong>
+            </button>
+            <button class="sop-node" type="button" data-step="5">
+              <span>06</span>
+              <strong>Prototype Finalization</strong>
+            </button>
+            <button class="sop-node" type="button" data-step="6">
+              <span>07</span>
+              <strong>Project Closure</strong>
+            </button>
+          </div>
+
+          <article class="sop-detail" aria-live="polite">
+            <div class="sop-illustration" id="sopIllustration" aria-hidden="true">
+              <div class="illo-screen">
+                <span class="illo-line one"></span>
+                <span class="illo-line two"></span>
+                <span class="illo-chart one"></span>
+                <span class="illo-chart two"></span>
+                <span class="illo-chart three"></span>
+              </div>
+              <div class="illo-person left"></div>
+              <div class="illo-person right"></div>
+              <div class="illo-badge" id="sopBadge">01</div>
+            </div>
+            <div class="sop-copy">
+              <p class="sop-eyebrow" id="sopEyebrow">Step 01</p>
+              <h3 id="sopTitle">Requirement Gathering</h3>
+              <p id="sopText">We understand business goals, current reports, data sources, decision makers, and the exact questions the dashboard must answer.</p>
+            </div>
+            <div class="sop-actions">
+              <button class="sop-cta ghost" id="sopPrev" type="button">Previous step</button>
+              <button class="sop-cta" id="sopNext" type="button">Next step</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
